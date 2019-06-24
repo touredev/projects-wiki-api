@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_090715) do
+ActiveRecord::Schema.define(version: 2019_06_24_112323) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2019_06_24_090715) do
     t.text "techs_stack"
     t.string "current_version"
     t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "login"
+    t.string "name"
+    t.string "url"
+    t.string "avatar_url"
+    t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
