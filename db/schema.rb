@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2019_06_24_090715) do
     t.string "name"
     t.text "description"
     t.text "techs_stack"
-    t.float "current_version"
+    t.string "current_version"
     t.string "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
