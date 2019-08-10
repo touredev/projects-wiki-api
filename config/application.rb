@@ -22,6 +22,11 @@ module ProjectsWikiApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.log_tags  = %i[subdomain uuid]
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
@@ -31,5 +36,13 @@ module ProjectsWikiApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      if File.exist?(env_file)
+        YAML.safe_load(File.open(env_file)).each { |key, value| ENV[key.to_s] = value }
+      end
+    end
+
   end
 end
